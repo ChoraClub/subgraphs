@@ -1,0 +1,68 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: OptimismGovernorV6
+    network: optimism
+    source:
+      address: "0xcDF27F107725988f2261Ce2256bDfCdE8B382B10"
+      abi: OptimismGovernorV6
+      startBlock: 72813609
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Initialized
+        - ProposalCanceled
+        - ProposalCreated
+        - ProposalCreated1
+        - ProposalCreated2
+        - ProposalCreated3
+        - ProposalDeadlineUpdated
+        - ProposalExecuted
+        - ProposalThresholdSet
+        - ProposalTypeUpdated
+        - QuorumNumeratorUpdated
+        - VoteCast
+        - VoteCastWithParams
+        - VotingDelaySet
+        - VotingPeriodSet
+      abis:
+        - name: OptimismGovernorV6
+          file: ./abis/OptimismGovernorV6.json
+      eventHandlers:
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: ProposalCanceled(uint256)
+          handler: handleProposalCanceled
+        - event: ProposalCreated(indexed uint256,indexed address,address[],uint256[],string[],bytes[],uint256,uint256,string,uint8)
+          handler: handleProposalCreated
+        - event: ProposalCreated(indexed uint256,indexed address,indexed address,bytes,uint256,uint256,string,uint8)
+          handler: handleProposalCreated1
+        - event: ProposalCreated(uint256,address,address,bytes,uint256,uint256,string)
+          handler: handleProposalCreated2
+        - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)
+          handler: handleProposalCreated3
+        - event: ProposalDeadlineUpdated(uint256,uint64)
+          handler: handleProposalDeadlineUpdated
+        - event: ProposalExecuted(uint256)
+          handler: handleProposalExecuted
+        - event: ProposalThresholdSet(uint256,uint256)
+          handler: handleProposalThresholdSet
+        - event: ProposalTypeUpdated(indexed uint256,uint8)
+          handler: handleProposalTypeUpdated
+        - event: QuorumNumeratorUpdated(uint256,uint256)
+          handler: handleQuorumNumeratorUpdated
+        - event: VoteCast(indexed address,uint256,uint8,uint256,string)
+          handler: handleVoteCast
+        - event: VoteCastWithParams(indexed address,uint256,uint8,uint256,string,bytes)
+          handler: handleVoteCastWithParams
+        - event: VotingDelaySet(uint256,uint256)
+          handler: handleVotingDelaySet
+        - event: VotingPeriodSet(uint256,uint256)
+          handler: handleVotingPeriodSet
+      file: ./src/optimism-governor-v-6.ts
