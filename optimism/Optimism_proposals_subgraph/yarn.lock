@@ -1418,42 +1418,6 @@ enquirer@2.3.6:
   dependencies:
     ansi-colors "^4.1.1"
 
-envio-darwin-arm64@v1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/envio-darwin-arm64/-/envio-darwin-arm64-1.3.0.tgz#acc97d8d4088d549b1c08e6013c0c6084ca8277f"
-  integrity sha512-QVI95RqGzDMpg46el+CCGodhWxGrC8cHgzv6AKKjziRrrCOEzzbCkGcIztPI64dyRQb5a+CQMXAZVyhGEgVoJw==
-
-envio-darwin-x64@v1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/envio-darwin-x64/-/envio-darwin-x64-1.3.0.tgz#1fe060c7f6710460b03c8f6af438bb3e5ebf8b96"
-  integrity sha512-vx3omWiUTGYLOzjo67FLpKZIsN5A8ukiNTLUuXongZRvvOmcA0U+mC4EidKByzooJpstTxZF5MI3aHLTZ4v/Kg==
-
-envio-linux-arm64@v1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/envio-linux-arm64/-/envio-linux-arm64-1.3.0.tgz#57fe628b7c73a36b7086c4b424774599666bc4e6"
-  integrity sha512-d783uTiEZIqwCQpqhqIy65pQIkXQEB2Kvy5LRWLUajl4ABSpdeSe57u0H+GAsYDOiJGg5sHrwyPXIVEOaHI2yA==
-
-envio-linux-x64@v1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/envio-linux-x64/-/envio-linux-x64-1.3.0.tgz#61d92959ab5440ec1337d21a65728cbf52486379"
-  integrity sha512-hYcxe+cgnyLloxtU/fNOyFRATVmbd6ggWU4Js+ASiiUSWseR4FFmnMMqsmzCURy9ibELr2d9+/QraNCgcsAMeA==
-
-envio-win32-x64@v1.3.0:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/envio-win32-x64/-/envio-win32-x64-0.0.4.tgz#baf2fa747d07c008d9deab4e7d66453b49fd230c"
-  integrity sha512-RHNzwHvUKi/IOCRz7E99G+HXrJ5wCk0w8fx6JbCn8tGz62lA6GrYkEohzDl0+cHVWgdedXOyBueBEO1uLmc1CQ==
-
-envio@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.npmjs.org/envio/-/envio-1.3.0.tgz"
-  integrity sha512-cF+Wwv3aIphGdO8Q/ALZPU9fYUFLmIqi4FjSIVEbuCiZzGsoLi+OtQE5OaIDiGG2+9GNMz7IcTzxlIhwk+FzBA==
-  optionalDependencies:
-    envio-darwin-arm64 v1.3.0
-    envio-darwin-x64 v1.3.0
-    envio-linux-arm64 v1.3.0
-    envio-linux-x64 v1.3.0
-    envio-win32-x64 v1.3.0
-
 err-code@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/err-code/-/err-code-3.0.1.tgz"
