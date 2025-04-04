@@ -5,7 +5,7 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: L2ArbitrumGovernor
+    name: L1ArbitrumGovernor
     network: arbitrum-one
     source:
       address: "0x789fC99093B09aD01C34DC7251D0C89ce743e5a4"

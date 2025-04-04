@@ -47,6 +47,17 @@ const ZERO_BD = BigDecimal.fromString("0")
 const ONE_BI = BigInt.fromI32(1)
 const SECONDS_PER_DAY = BigInt.fromI32(86400)
 
+
+// Average block time in seconds (for estimation only)
+const AVG_BLOCK_TIME = BigInt.fromI32(2)
+
+function estimateTimestamp(currentBlock: BigInt, currentTimestamp: BigInt, targetBlock: BigInt): BigInt {
+  let blockDifference = targetBlock.minus(currentBlock)
+  let estimatedTimeDifference = blockDifference.times(AVG_BLOCK_TIME)
+  return currentTimestamp.plus(estimatedTimeDifference)
+}
+
+
 // Utility function to get start of day
 function getStartOfDay(timestamp: BigInt): BigInt {
   return timestamp.div(SECONDS_PER_DAY).times(SECONDS_PER_DAY)
@@ -264,6 +275,18 @@ export function handleProposalCreated(event: ProposalCreatedEvent): void {
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
+  // Estimate start and end times based on current block and timestamp
+  entity.startTime = estimateTimestamp(
+    event.block.number,
+    event.block.timestamp,
+    event.params.startBlock
+  )
+  
+  entity.endTime = estimateTimestamp(
+    event.block.number,
+    event.block.timestamp,
+    event.params.endBlock
+  )
 
   entity.save()
 }
@@ -284,6 +307,17 @@ export function handleProposalCreated1(event: ProposalCreated1Event): void {
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
+  entity.startTime = estimateTimestamp(
+    event.block.number,
+    event.block.timestamp,
+    event.params.startBlock
+  )
+  
+  entity.endTime = estimateTimestamp(
+    event.block.number,
+    event.block.timestamp,
+    event.params.endBlock
+  )
 
   entity.save()
 }
@@ -303,6 +337,17 @@ export function handleProposalCreated2(event: ProposalCreated2Event): void {
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
+  entity.startTime = estimateTimestamp(
+    event.block.number,
+    event.block.timestamp,
+    event.params.startBlock
+  )
+  
+  entity.endTime = estimateTimestamp(
+    event.block.number,
+    event.block.timestamp,
+    event.params.endBlock
+  )
 
   entity.save()
 }
@@ -324,6 +369,17 @@ export function handleProposalCreated3(event: ProposalCreated3Event): void {
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
+  entity.startTime = estimateTimestamp(
+    event.block.number,
+    event.block.timestamp,
+    event.params.startBlock
+  )
+  
+  entity.endTime = estimateTimestamp(
+    event.block.number,
+    event.block.timestamp,
+    event.params.endBlock
+  )
 
   entity.save()
 }
@@ -342,6 +398,24 @@ export function handleProposalDeadlineUpdated(
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+    // Find and update the corresponding proposal
+    // let proposalId = event.params.proposalId.toString()
+    let proposal =  ProposalCreated.load(Bytes.fromByteArray(Bytes.fromBigInt( event.params.proposalId)));
+    
+    if (proposal) {
+      // Calculate extended end block by adding deadline to original endBlock
+      let extendedEndBlock = proposal.endBlock.plus(event.params.deadline)
+      // proposal.extendedEndBlock = extendedEndBlock
+      
+      // Calculate extended end time (2 seconds per block in Optimism)
+      // proposal.extendedEndTime = extendedEndBlock.times(BigInt.fromI32(2))
+      proposal.extendedEndTime = estimateTimestamp(
+        event.block.number,
+        event.block.timestamp,
+        extendedEndBlock
+      )
+      proposal.save()
+    }
 }
 
 export function handleProposalExecuted(event: ProposalExecutedEvent): void {

@@ -20,15 +20,21 @@ type ProposalCreated @entity(immutable: true) {
   proposer: Bytes! # address
   targets: [Bytes!]! # address[]
   values: [BigInt!]! # uint256[]
+  votingModule: Bytes # address
+  proposalData: Bytes # bytes
   signatures: [String!]! # string[]
   calldatas: [Bytes!]! # bytes[]
   startBlock: BigInt! # uint256
   endBlock: BigInt! # uint256
   description: String! # string
-  proposalType: Int! # uint8
+  proposalType: Int # uint8
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  startTime: BigInt!
+  endTime: BigInt!
+  extendedEndTime: BigInt
+
 }
 
 type ProposalCreated1 @entity(immutable: true) {
@@ -44,6 +50,9 @@ type ProposalCreated1 @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  startTime: BigInt!
+  endTime: BigInt!
+  extendedEndTime: BigInt
 }
 
 type ProposalCreated2 @entity(immutable: true) {
@@ -58,6 +67,9 @@ type ProposalCreated2 @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  startTime: BigInt!
+  endTime: BigInt!
+  extendedEndTime: BigInt
 }
 
 type ProposalCreated3 @entity(immutable: true) {
@@ -74,6 +86,9 @@ type ProposalCreated3 @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  startTime: BigInt!
+  endTime: BigInt!
+  extendedEndTime: BigInt
 }
 
 type ProposalDeadlineUpdated @entity(immutable: true) {
@@ -163,49 +178,49 @@ type VotingPeriodSet @entity(immutable: true) {
   transactionHash: Bytes!
 }
 type VoterDetail @entity {
-id: ID!
-voter: Bytes!
-proposalId: BigInt!
-votingPower: BigInt!
-support: Int!
-timestamp: BigInt!
-transactionHash: Bytes! 
+  id: ID!
+  voter: Bytes!
+  proposalId: BigInt!
+  votingPower: BigInt!
+  support: Int!
+  timestamp: BigInt!
+  transactionHash: Bytes! 
 }
 type ProposalDailyVoteSummary @entity {
-id: ID!
-proposalId: BigInt!
-day: BigInt!  # Timestamp of the start of the day
-dayString: String!  # Human-readable date for easier querying
-votesFor: BigInt!
-votesAgainst: BigInt!
-votesAbstain: BigInt!
-totalVotes: BigInt!
-totalWeight: BigInt!
-weightFor: BigInt!
-weightAgainst: BigInt!
-weightAbstain: BigInt!
-percentFor: BigDecimal
-percentAgainst: BigDecimal
-percentAbstain: BigDecimal
-proposal: ProposalCreated
+  id: ID!
+  proposalId: BigInt!
+  day: BigInt!  # Timestamp of the start of the day
+  dayString: String!  # Human-readable date for easier querying
+  votesFor: BigInt!
+  votesAgainst: BigInt!
+  votesAbstain: BigInt!
+  totalVotes: BigInt!
+  totalWeight: BigInt!
+  weightFor: BigInt!
+  weightAgainst: BigInt!
+  weightAbstain: BigInt!
+  percentFor: BigDecimal
+  percentAgainst: BigDecimal
+  percentAbstain: BigDecimal
+  proposal: ProposalCreated
 }
 
 type ProposalVoteSummary @entity {
-id: ID!
-proposalId: BigInt!
-votesFor: BigInt!
-votesAgainst: BigInt!
-votesAbstain: BigInt!
-totalVotes: BigInt!
-totalWeight: BigInt!
-lastUpdated: BigInt!
-proposal: ProposalCreated
-percentFor: BigDecimal
-percentAgainst: BigDecimal
-percentAbstain: BigDecimal
-weightFor: BigInt!
-weightAgainst: BigInt!
-weightAbstain: BigInt!
-voterDetails: [VoterDetail!]!
-dailySummaries: [ProposalDailyVoteSummary!]
+  id: ID!
+  proposalId: BigInt!
+  votesFor: BigInt!
+  votesAgainst: BigInt!
+  votesAbstain: BigInt!
+  totalVotes: BigInt!
+  totalWeight: BigInt!
+  lastUpdated: BigInt!
+  proposal: ProposalCreated
+  percentFor: BigDecimal
+  percentAgainst: BigDecimal
+  percentAbstain: BigDecimal
+  weightFor: BigInt!
+  weightAgainst: BigInt!
+  weightAbstain: BigInt!
+  voterDetails: [VoterDetail!]!
+  dailySummaries: [ProposalDailyVoteSummary!]
 }

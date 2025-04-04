@@ -6,6 +6,13 @@ type Initialized @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type ContractSource @entity {
+  id: ID!
+  contractAddress: String!
+  governors: String!
+  # Add derived field for proposals
+  proposals: [ProposalCreated!]! @derivedFrom(field: "contractSource")
+}
 type LateQuorumVoteExtensionSet @entity(immutable: true) {
   id: Bytes!
   oldVoteExtension: BigInt! # uint64
@@ -46,6 +53,16 @@ type ProposalCreated @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  contractSource: ContractSource
+  votingDelay: BigInt!
+  isInVotingDelay: Boolean!
+  estimatedEndTime: BigInt!
+  endDateUTC: String!
+  status: String!
+  isQueued: Boolean!
+  queueTime: BigInt
+  queueTimeUTC: String
+  eta: BigInt
 }
 
 type ProposalExecuted @entity(immutable: true) {
@@ -111,6 +128,8 @@ type VoteCast @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+    # Add reference to proposal
+  proposal: ProposalCreated!
 }
 
 type VoteCastWithParams @entity(immutable: true) {
@@ -124,6 +143,7 @@ type VoteCastWithParams @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  proposal: ProposalCreated!
 }
 
 type VotingDelaySet @entity(immutable: true) {
@@ -151,6 +171,8 @@ votingPower: BigInt!
 support: Int!
 timestamp: BigInt!
 transactionHash: Bytes!  # Add this line
+# Add reference to proposal
+proposal: ProposalCreated!
 }
 
 type ProposalDailyVoteSummary @entity {
@@ -169,25 +191,24 @@ weightAbstain: BigInt!
 percentFor: BigDecimal
 percentAgainst: BigDecimal
 percentAbstain: BigDecimal
-proposal: ProposalCreated
+proposal: ProposalCreated!
 }
 
+
 type ProposalVoteSummary @entity {
-id: ID!
-proposalId: BigInt! # uint256
-votesFor: BigInt!
-votesAgainst: BigInt!
-votesAbstain: BigInt!
-totalVotes: BigInt!
-totalWeight: BigInt!
-lastUpdated: BigInt!
-proposal: ProposalCreated
-percentFor: BigDecimal
-percentAgainst: BigDecimal
-percentAbstain: BigDecimal
-weightFor: BigInt!
-weightAgainst: BigInt!
-weightAbstain: BigInt!
-voterDetails: [VoterDetail!]!
-dailySummaries: [ProposalDailyVoteSummary!]
+  id: ID!
+  proposalId: BigInt!
+  votesFor: BigInt!
+  votesAgainst: BigInt!
+  votesAbstain: BigInt!
+  totalVotes: BigInt!
+  totalWeight: BigInt!
+  lastUpdated: BigInt!
+  weightFor: BigInt!
+  weightAgainst: BigInt!
+  weightAbstain: BigInt!
+  percentFor: BigDecimal
+  percentAgainst: BigDecimal
+  percentAbstain: BigDecimal
+  proposal: ProposalCreated!
 }
