@@ -29,8 +29,6 @@ dataSources:
         - TimelockChange
         - VoteCast
         - VoteCastWithParams
-        - VotingDelaySet
-        - VotingPeriodSet
       abis:
         - name: L2ArbitrumGovernor
           file: ./abis/L2ArbitrumGovernor.json
@@ -61,10 +59,6 @@ dataSources:
           handler: handleVoteCast
         - event: VoteCastWithParams(indexed address,uint256,uint8,uint256,string,bytes)
           handler: handleVoteCastWithParams
-        - event: VotingDelaySet(uint256,uint256)
-          handler: handleVotingDelaySet
-        - event: VotingPeriodSet(uint256,uint256)
-          handler: handleVotingPeriodSet
       file: ./src/l-2-arbitrum-governor.ts
   - kind: ethereum
     name: proxy
@@ -91,8 +85,6 @@ dataSources:
         - TimelockChange
         - VoteCast
         - VoteCastWithParams
-        - VotingDelaySet
-        - VotingPeriodSet
       abis:
         - name: L2ArbitrumGovernor
           file: ./abis/L2ArbitrumGovernor.json
@@ -123,8 +115,4 @@ dataSources:
           handler: handleVoteCast
         - event: VoteCastWithParams(indexed address,uint256,uint8,uint256,string,bytes)
           handler: handleVoteCastWithParams
-        - event: VotingDelaySet(uint256,uint256)
-          handler: handleVotingDelaySet
-        - event: VotingPeriodSet(uint256,uint256)
-          handler: handleVotingPeriodSet
       file: ./src/l-2-arbitrum-governor.ts

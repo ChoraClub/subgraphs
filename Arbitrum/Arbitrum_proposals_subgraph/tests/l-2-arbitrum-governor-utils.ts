@@ -14,8 +14,7 @@ import {
   TimelockChange,
   VoteCast,
   VoteCastWithParams,
-  VotingDelaySet,
-  VotingPeriodSet
+
 } from "../generated/L2ArbitrumGovernor/L2ArbitrumGovernor"
 
 export function createInitializedEvent(version: i32): Initialized {
@@ -380,50 +379,3 @@ export function createVoteCastWithParamsEvent(
   return voteCastWithParamsEvent
 }
 
-export function createVotingDelaySetEvent(
-  oldVotingDelay: BigInt,
-  newVotingDelay: BigInt
-): VotingDelaySet {
-  let votingDelaySetEvent = changetype<VotingDelaySet>(newMockEvent())
-
-  votingDelaySetEvent.parameters = new Array()
-
-  votingDelaySetEvent.parameters.push(
-    new ethereum.EventParam(
-      "oldVotingDelay",
-      ethereum.Value.fromUnsignedBigInt(oldVotingDelay)
-    )
-  )
-  votingDelaySetEvent.parameters.push(
-    new ethereum.EventParam(
-      "newVotingDelay",
-      ethereum.Value.fromUnsignedBigInt(newVotingDelay)
-    )
-  )
-
-  return votingDelaySetEvent
-}
-
-export function createVotingPeriodSetEvent(
-  oldVotingPeriod: BigInt,
-  newVotingPeriod: BigInt
-): VotingPeriodSet {
-  let votingPeriodSetEvent = changetype<VotingPeriodSet>(newMockEvent())
-
-  votingPeriodSetEvent.parameters = new Array()
-
-  votingPeriodSetEvent.parameters.push(
-    new ethereum.EventParam(
-      "oldVotingPeriod",
-      ethereum.Value.fromUnsignedBigInt(oldVotingPeriod)
-    )
-  )
-  votingPeriodSetEvent.parameters.push(
-    new ethereum.EventParam(
-      "newVotingPeriod",
-      ethereum.Value.fromUnsignedBigInt(newVotingPeriod)
-    )
-  )
-
-  return votingPeriodSetEvent
-}

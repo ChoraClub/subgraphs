@@ -12,8 +12,6 @@ import {
   TimelockChange as TimelockChangeEvent,
   VoteCast as VoteCastEvent,
   VoteCastWithParams as VoteCastWithParamsEvent,
-  VotingDelaySet as VotingDelaySetEvent,
-  VotingPeriodSet as VotingPeriodSetEvent
 } from "../generated/L2ArbitrumGovernor/L2ArbitrumGovernor"
 import { Bytes } from "@graphprotocol/graph-ts";
 import {
@@ -30,8 +28,6 @@ import {
   TimelockChange,
   VoteCast,
   VoteCastWithParams,
-  VotingDelaySet,
-  VotingPeriodSet,
   ProposalVoteSummary,
   VoterDetail,
   ProposalDailyVoteSummary,
@@ -535,30 +531,5 @@ export function handleVoteCastWithParams(event: VoteCastWithParamsEvent): void {
     event.block.timestamp
   )
 }
-export function handleVotingDelaySet(event: VotingDelaySetEvent): void {
-  let entity = new VotingDelaySet(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.oldVotingDelay = event.params.oldVotingDelay
-  entity.newVotingDelay = event.params.newVotingDelay
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
 
-  entity.save()
-}
-
-export function handleVotingPeriodSet(event: VotingPeriodSetEvent): void {
-  let entity = new VotingPeriodSet(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.oldVotingPeriod = event.params.oldVotingPeriod
-  entity.newVotingPeriod = event.params.newVotingPeriod
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}

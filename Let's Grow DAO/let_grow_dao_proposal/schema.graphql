@@ -1,0 +1,208 @@
+type Approval @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AvatarSet @entity(immutable: true) {
+  id: Bytes!
+  previousAvatar: Bytes! # address
+  newAvatar: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CancelProposal @entity(immutable: true) {
+  id: Bytes!
+  proposal: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ChangedGuard @entity(immutable: true) {
+  id: Bytes!
+  guard: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type GovernanceConfigSet @entity(immutable: true) {
+  id: Bytes!
+  voting: BigInt! # uint32
+  grace: BigInt! # uint32
+  newOffering: BigInt! # uint256
+  quorum: BigInt! # uint256
+  sponsor: BigInt! # uint256
+  minRetention: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Initialized @entity(immutable: true) {
+  id: Bytes!
+  version: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LockAdmin @entity(immutable: true) {
+  id: Bytes!
+  adminLock: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LockGovernor @entity(immutable: true) {
+  id: Bytes!
+  governorLock: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LockManager @entity(immutable: true) {
+  id: Bytes!
+  managerLock: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LootPaused @entity(immutable: true) {
+  id: Bytes!
+  paused: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ProcessProposal @entity(immutable: true) {
+  id: Bytes!
+  proposal: BigInt! # uint256
+  passed: Boolean! # bool
+  actionFailed: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Ragequit @entity(immutable: true) {
+  id: Bytes!
+  member: Bytes! # address
+  to: Bytes! # address
+  lootToBurn: BigInt! # uint256
+  sharesToBurn: BigInt! # uint256
+  tokens: [Bytes!]! # address[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SetTrustedForwarder @entity(immutable: true) {
+  id: Bytes!
+  forwarder: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SetupComplete @entity(immutable: true) {
+  id: Bytes!
+  lootPaused: Boolean! # bool
+  sharesPaused: Boolean! # bool
+  gracePeriod: BigInt! # uint32
+  votingPeriod: BigInt! # uint32
+  proposalOffering: BigInt! # uint256
+  quorumPercent: BigInt! # uint256
+  sponsorThreshold: BigInt! # uint256
+  minRetentionPercent: BigInt! # uint256
+  name: String! # string
+  symbol: String! # string
+  totalShares: BigInt! # uint256
+  totalLoot: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ShamanSet @entity(immutable: true) {
+  id: Bytes!
+  shaman: Bytes! # address
+  permission: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SharesPaused @entity(immutable: true) {
+  id: Bytes!
+  paused: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SponsorProposal @entity(immutable: true) {
+  id: Bytes!
+  member: Bytes! # address
+  proposal: BigInt! # uint256
+  votingStarts: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SubmitProposal @entity(immutable: true) {
+  id: Bytes!
+  proposal: BigInt! # uint256
+  proposalDataHash: Bytes! # bytes32
+  votingPeriod: BigInt! # uint256
+  proposalData: Bytes! # bytes
+  expiration: BigInt! # uint256
+  baalGas: BigInt! # uint256
+  selfSponsor: Boolean! # bool
+  timestamp: BigInt! # uint256
+  details: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SubmitVote @entity(immutable: true) {
+  id: Bytes!
+  member: Bytes! # address
+  balance: BigInt! # uint256
+  proposal: BigInt! # uint256
+  approved: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TargetSet @entity(immutable: true) {
+  id: Bytes!
+  previousTarget: Bytes! # address
+  newTarget: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
